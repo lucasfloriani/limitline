@@ -63,11 +63,17 @@ const _limitOnPaste = (limit, elem) => {
   elem.addEventListener("paste", e => {
     e.preventDefault()
     const text = e.target.value
+
+    const startText = text.substring(0, elem.selectionStart)
     const pastedText = e.clipboardData.getData('text')
-    const newContent = text.substring(0, elem.selectionStart) + pastedText + text.substring(elem.selectionStart)
+    const endText = text.substring(elem.selectionStart)
+
+    const newContent = startText + pastedText + endText
     const lines = newContent.split("\n")
 
     const newLines = lines.flatMap(line => line.length >= limit ? line.match(new RegExp(`.{1,${limit}}`, 'g')) : line)
     e.target.value = newLines.join("\n")
+
+    elem.selectionStart = elem.selectionEnd = (startText + pastedText).length
   })
 }
