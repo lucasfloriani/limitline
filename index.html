@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="style.css">
   <title>TextArea - Line Limiter</title>
 </head>
 <body>
@@ -11,17 +12,8 @@
   <textarea cols="90" rows="20" style="margin-top: 30px;"></textarea>
   <script src="index.js"></script>
   <script>
-    var textArea = document.getElementById("data");
+    var textArea = document.getElementById("data")
     limitBy(10)(textArea)
   </script>
-  <style>
-    body {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      height: 100vh;
-    }
-  </style>
 </body>
 </html>

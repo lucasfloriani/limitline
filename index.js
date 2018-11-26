@@ -12,7 +12,16 @@ const LetterA = 65
 const LetterC = 67
 
 const Buttons = [Backspace, Enter, End, Home, Left, Up, Right, Down, Delete]
+const CopyCommands = [LetterA, LetterC, LetterV]
 
+const getElemTextUntilCursorByArray = elem => elem.value.substr(0, elem.selectionStart).split("\n")
+
+const getLineNumber = elem => getElemTextUntilCursorByArray(elem).length
+
+const getColumn = elem => {
+  const lines = getElemTextUntilCursorByArray(elem)
+  return lines[lines.length - 1].length
+}
 
 const limitBy = limit => {
   return elem => {
@@ -28,7 +37,7 @@ const _limitOnKeyDown = (limit, elem) => {
     const index = getLineNumber(elem) - 1
     const line = lines[index]
 
-    if (e.ctrlKey && (e.keyCode === LetterC || e.keyCode === LetterV || e.keyCode === LetterA)) {
+    if (e.ctrlKey && CopyCommands.includes(e.keyCode)) {
       return
     }
 
@@ -47,28 +56,18 @@ const _limitOnKeyDown = (limit, elem) => {
         e.preventDefault()
       }
     }
-  });
+  })
 }
 
 const _limitOnPaste = (limit, elem) => {
   elem.addEventListener("paste", e => {
-    e.preventDefault();
-    const text = e.target.value;
-    const pastedText = e.clipboardData.getData('text');
+    e.preventDefault()
+    const text = e.target.value
+    const pastedText = e.clipboardData.getData('text')
     const newContent = text.substring(0, elem.selectionStart) + pastedText + text.substring(elem.selectionStart)
-    const lines = newContent.split("\n");
+    const lines = newContent.split("\n")
 
-    const newLines = lines.flatMap(line => (line.length >= limit) ? line.match(new RegExp('.{1,' + limit + '}', 'g')) : line)
-    e.target.value = newLines.join("\n");
-  });
-}
-
-const getElemTextUntilCursorByArray = elem => elem.value.substr(0, elem.selectionStart).split("\n")
-
-
-const getLineNumber = elem => getElemTextUntilCursorByArray(elem).length
-
-const getColumn = elem => {
-  const lines = getElemTextUntilCursorByArray(elem)
-  return lines[lines.length - 1].length
+    const newLines = lines.flatMap(line => line.length >= limit ? line.match(new RegExp(`.{1,${limit}}`, 'g')) : line)
+    e.target.value = newLines.join("\n")
+  })
 }
