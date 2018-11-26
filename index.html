@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>TextArea - Line Limiter</title>
+</head>
+<body>
+  <textarea id="data" cols="90" rows="20"></textarea>
+  <textarea cols="90" rows="20" style="margin-top: 30px;"></textarea>
+  <script src="index.js"></script>
+  <script>
+    var textArea = document.getElementById("data");
+    limitBy(10)(textArea)
+  </script>
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      height: 100vh;
+    }
+  </style>
+</body>
+</html>
