@@ -1,15 +1,28 @@
 {
   "name": "limit-line",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.0.1",
+  "description": "Limit quantity of characters in each line of textarea html tag",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucasfloriani/limitline.git"
+  },
+  "keywords": [
+    "textarea",
+    "javascript",
+    "limit",
+    "characters"
+  ],
+  "author": "Lucas A. Floriani",
+  "license": "MIT",
   "devDependencies": {
     "jest": "^23.6.0"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/lucasfloriani/limitline/issues"
+  },
+  "homepage": "https://github.com/lucasfloriani/limitline#readme"
 }
